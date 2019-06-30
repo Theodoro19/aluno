@@ -76,7 +76,7 @@ public class AlunoIntegrationTest {
 
 		when(alunoService.buscarPeloId(1L)).thenReturn(aluno);
 
-		mvc.perform(get("/aluno/1").contentType(APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(get("/aluno/1").contentType(APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(jsonPath("$.nome", is(aluno.getNomeAluno())))
 				.andExpect(jsonPath("$.idade", is(aluno.getIdadeAluno())));
 	}
@@ -86,7 +86,7 @@ public class AlunoIntegrationTest {
 
 		String json = "{\"nome\": \"testeNome\", \"idadeAluno\": 05}";
 
-		mvc.perform(post("/aluno").contentType(APPLICATION_JSON).content(json)).andExpect(status().isCreated())
+		mockMvc.perform(post("/aluno").contentType(APPLICATION_JSON).content(json)).andExpect(status().isCreated())
 				.andReturn();
 	}
 
